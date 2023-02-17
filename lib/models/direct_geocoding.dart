@@ -1,5 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-class DirectGeocoding {
+import 'package:equatable/equatable.dart';
+
+class DirectGeocoding extends Equatable {
   final String name;
   final double lat;
   final double lon;
@@ -23,19 +24,7 @@ class DirectGeocoding {
   }
 
   @override
-  bool operator ==(covariant DirectGeocoding other) {
-    if (identical(this, other)) return true;
-
-    return other.name == name &&
-        other.lat == lat &&
-        other.lon == lon &&
-        other.country == country;
-  }
-
-  @override
-  int get hashCode {
-    return name.hashCode ^ lat.hashCode ^ lon.hashCode ^ country.hashCode;
-  }
+  List<Object> get props => [name, lat, lon, country];
 
   @override
   String toString() {

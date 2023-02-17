@@ -1,5 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-class Weather {
+import 'package:equatable/equatable.dart';
+
+class Weather extends Equatable {
   final String description;
   final String icon;
   final double temp;
@@ -27,8 +28,8 @@ class Weather {
       description: weather['description'],
       icon: weather['icon'],
       temp: main['temp'],
-      tempMin: main['tempMin'],
-      tempMax: main['tempMax'],
+      tempMin: main['temp_min'],
+      tempMax: main['temp_max'],
       name: '',
       country: '',
       lastUpdated: DateTime.now(),
@@ -43,37 +44,26 @@ class Weather {
         tempMax: 100.0,
         name: '',
         country: '',
-        // lastUpdated: DateTime.now(1970),
-        lastUpdated: DateTime.now(),
+        lastUpdated: DateTime(1970),
       );
 
   @override
-  bool operator ==(covariant Weather other) {
-    if (identical(this, other)) return true;
-
-    return other.description == description &&
-        other.icon == icon &&
-        other.temp == temp &&
-        other.tempMax == tempMax &&
-        other.name == name &&
-        other.country == country &&
-        other.lastUpdated == lastUpdated;
-  }
-
-  @override
-  int get hashCode {
-    return description.hashCode ^
-        icon.hashCode ^
-        temp.hashCode ^
-        tempMax.hashCode ^
-        name.hashCode ^
-        country.hashCode ^
-        lastUpdated.hashCode;
+  List<Object> get props {
+    return [
+      description,
+      icon,
+      temp,
+      tempMin,
+      tempMax,
+      name,
+      country,
+      lastUpdated,
+    ];
   }
 
   @override
   String toString() {
-    return 'Weather(description: $description, icon: $icon, temp: $temp, tempMax: $tempMax, name: $name, country: $country, lastUpdated: $lastUpdated)';
+    return 'Weather(description: $description, icon: $icon, temp: $temp, tempMin: $tempMin, tempMax: $tempMax, name: $name, country: $country, lastUpdated: $lastUpdated)';
   }
 
   Weather copyWith({
