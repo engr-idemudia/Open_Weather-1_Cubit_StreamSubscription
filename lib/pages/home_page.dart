@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-    String? _city;
+  String? _city;
 
   ////create a call for testing
   // @override
@@ -34,10 +34,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Weather'),
-        actions: [
-          IconButton(
+      appBar: AppBar(title: Text('Weather'), actions: [
+        IconButton(
             icon: const Icon(Icons.search),
             onPressed: () async {
               _city = await Navigator.push(
@@ -47,16 +45,58 @@ class _HomePageState extends State<HomePage> {
                 }),
               );
               print('city: $_city');
-                 if (_city != null) {
+              if (_city != null) {
                 context.read<WeatherCubit>().fetchWeather(_city!);
               }
-            }
-          )
-        ]
-      ),
-      body: Center(
-        child: Text('Home'),
-      ),
+            })
+      ]),
+      body: _showWeather(),
     );
+  }
+
+  Widget _showWeather() {
+    return BlocConsumer<WeatherCubit, WeatherState>(builder: (context, state) {
+      if (state.status == WeatherStatus.initial) {
+        return const Center(
+          child: Text(
+            'Select a city',
+            style: TextStyle(fontSize: 20.0),
+          ),
+        );
+      }
+      if (state.status == WeatherStatus.loading) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+
+      if(state.status == WeatherStatus.error && state.weather.name == ''){
+         return const Center(
+          child: Text(
+            'Select a city',
+            style: TextStyle(fontSize: 20.0),
+          ),
+        );
+      }
+
+
+      return Center(
+        child: Text(
+          state.weather.name,
+          style: const TextStyle(fontSize: 18.0),
+        ),
+      );
+    }, listener: (context, state) {
+      if (state.status == WeatherStatus.error) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text(state.error.errMsg),
+            );
+          },
+        );
+      }
+    });
   }
 }
