@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:open_weather_cubit/cubits/weather/weather_cubit.dart';
 import 'package:open_weather_cubit/pages/search_page.dart';
+import 'package:open_weather_cubit/widgets/error_dialog.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:open_weather_cubit/repositories/weather_repository.dart';
 // import 'package:open_weather_cubit/services/weather_api_services.dart';
@@ -70,15 +71,14 @@ class _HomePageState extends State<HomePage> {
         );
       }
 
-      if(state.status == WeatherStatus.error && state.weather.name == ''){
-         return const Center(
+      if (state.status == WeatherStatus.error && state.weather.name == '') {
+        return const Center(
           child: Text(
             'Select a city',
             style: TextStyle(fontSize: 20.0),
           ),
         );
       }
-
 
       return Center(
         child: Text(
@@ -88,14 +88,16 @@ class _HomePageState extends State<HomePage> {
       );
     }, listener: (context, state) {
       if (state.status == WeatherStatus.error) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              content: Text(state.error.errMsg),
-            );
-          },
-        );
+        errorDialog(context, state.error.errMsg);
+
+        // showDialog(
+        //   context: context,
+        //   builder: (context) {
+        //     return AlertDialog(
+        //       content: Text(state.error.errMsg),
+        //     );
+        //   },
+        // );
       }
     });
   }
