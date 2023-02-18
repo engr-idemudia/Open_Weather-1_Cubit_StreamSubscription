@@ -61,7 +61,7 @@ class WeatherApiServices {
       },
     );
 
-      try {
+    try {
       final http.Response response = await httpClient.get(uri);
 
       if (response.statusCode != 200) {

@@ -31,7 +31,7 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(
         title: Text('Search'),
       ),
-          body: Form(
+      body: Form(
         key: _formKey,
         autovalidateMode: autovalidateMode,
         child: Column(

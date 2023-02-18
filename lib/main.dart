@@ -6,6 +6,7 @@ import 'package:open_weather_cubit/cubits/weather/weather_cubit.dart';
 import 'package:open_weather_cubit/repositories/weather_repository.dart';
 import 'package:open_weather_cubit/services/weather_api_services.dart';
 
+import 'cubits/temp_settings/temp_settings_cubit.dart';
 import 'pages/home_page.dart';
 
 void main() async {
@@ -26,10 +27,13 @@ class MyApp extends StatelessWidget {
       ),
       child: MultiBlocProvider(
         providers: [
-              BlocProvider<WeatherCubit>(
+          BlocProvider<WeatherCubit>(
             create: (context) => WeatherCubit(
               weatherRepository: context.read<WeatherRepository>(),
             ),
+          ),
+          BlocProvider<TempSettingsCubit>(
+            create: (context) => TempSettingsCubit(),
           ),
         ],
         child: MaterialApp(
