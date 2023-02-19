@@ -31,7 +31,7 @@ dependencies:
   equatable: ^2.0.5
   flutter:
     sdk: flutter
-  flutter_bloc: 8.0.1
+  flutter_bloc: ^8.1.2
   flutter_dotenv: 5.0.2
   http: 0.13.4
   recase: 4.0.0
