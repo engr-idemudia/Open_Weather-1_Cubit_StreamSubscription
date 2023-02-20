@@ -1,4 +1,4 @@
-# open_weather_cubit
+# open_weather_cubit_StreamSubscription
 
 A Weather App using StreamSubscription for communication between the Cubits. 
 The app uses async operations to fetch, read and display a location and weather-related data from a remote (OpenWeatherMap) API call. 
