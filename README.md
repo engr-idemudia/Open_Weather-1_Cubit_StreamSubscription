@@ -1,4 +1,4 @@
-# open_weather_Cubit_StreamSubscription
+# open_weather-1_Cubit_StreamSubscription
 
 ### A Weather App using StreamSubscription for communication between the Cubits.
 
